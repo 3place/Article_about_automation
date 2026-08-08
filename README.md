@@ -34,7 +34,7 @@ greetings = [
 
 Telethon упрощает взаимодействие с Telegram. Забудьте о сложных настройках Puppeteer. Telethon — ваш личный программный ассистент.
 
-Как это работает?
+**Как это работает?**
 
 Регистрация приложения на [my.telegram.org](https://my.telegram.org/auth) для получения api_id и api_hash.
 
@@ -42,7 +42,7 @@ Telethon упрощает взаимодействие с Telegram. Забудь
 
 
 
-Преимущества Telethon:
+**Преимущества Telethon:**
 
 Простая установка (pip install telethon).
 
@@ -63,7 +63,7 @@ Telegram не любит автоматизацию и тщательно сле
 Соблюдайте [лимиты API, описанные в статье на Хабре](https://habr.com/ru/companies/tensor/artikles/799565/). Например, не отправляйте больше 10 медиасообщений за 5 минут - даже с лёгкой анимацией это вызовет ошибку.
 
 ## Скрипт: первая версия
-
+```
 import asyncio
 from telethon import TelegramClient
 from datetime import datetime, timedelta, time
@@ -98,9 +98,9 @@ async def main():
     await client.disconnect()
 
 asyncio.run(main())
+```
 
-
-Подготовка:
+**Подготовка:**
 
 Установите необходимые библиотеки: pip install telethon python-dotenv pytz.
 
@@ -112,6 +112,7 @@ asyncio.run(main())
 
 Полная версия скрипта автоматизации своей переписки с девушкой в Telegram представлена ниже. Скрипт подключается к аккаунту через API, загружает данные аутентификации из .env, и планирует отправку случайных сообщений (утренних и дневных) для заданных пользователей в определённое время:
 
+```
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -139,6 +140,7 @@ greetings = [
     "Доброе утро! Как настроение, что планируешь на день?",
     "Здравствуй! Как ты себя чувствуешь после сна?"
 ]
+
 supportive_messages = [
     "Как ты там? Всё в порядке?",
     "Как проходит твой день?",
@@ -150,7 +152,6 @@ supportive_messages = [
     "Надеюсь, день приносит тебе только положительные моменты!",
     "Как ты себя чувствуешь? Хочешь поговорить?"
 ]
-
 ekb_timezone = pytz.timezone('Asia/Yekaterinburg')
 
 async def schedule_messages(client, user, messages, start_hour, end_hour, days, description):
@@ -171,7 +172,6 @@ async def schedule_messages(client, user, messages, start_hour, end_hour, days, 
             print(f"✅ Отложенное сообщение отправлено для {description} на {schedule_time_ekb.strftime('%Y-%m-%d %H:%M:%S')}")
         except Exception as e:
             print(f"❌ Ошибка при отправке сообщения для {description}: {e}")
-
 
 async def main():
     client = TelegramClient(session_name, api_id, api_hash)
@@ -199,7 +199,7 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
-
+```
 ## Заключение
 
 Данная автоматизация — инструмент для выражения эмоций. Скрипт не заменит живое общение, но поможет не забыть проявить внимание. Отложенные сообщения — это лишь начало. Не переставайте общаться лично. Автоматизируйте с душой, искренностью и чувством меры!
